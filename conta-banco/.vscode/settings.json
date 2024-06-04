@@ -1,4 +1,5 @@
 {
+    "java.home": "C:\\Program Files\\Java\\jdk-11.0.15",
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
