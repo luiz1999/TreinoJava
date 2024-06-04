@@ -1,9 +1,9 @@
+//To do: Conhecer e importar a classe Scanner
 import java.util.Locale;
 import java.util.Scanner;
 
 public class ContaTerminal {
     public static void main(String[] args) {
-        //To do: Conhecer e importar a classe Scanner
         Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
 
         //Exibir as mensagens para o nosso usuário
