@@ -1,40 +1,79 @@
 package candidatura;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ProcessoSeletivo {
     public static void main(String[] args) {
+        String[] candidatos = {"FELIPE", "MARCIA", "JULIA", "PAULO", "AUGUSTO"};
+        for(String candidato: candidatos) {
+            entrandoEmContato(candidato);
+        }
+    }
 
-        // Caminho para o executável Java
-        String javaPath = "C:\\Program Files\\Java\\jdk-11.0.15\\bin\\java.exe";
-        // Opções JDWP para depuração
-        String jdwpOptions = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:51725";
-        // Caminho do classpath
-        String classPath = "C:\\Users\\Luis Felipe\\Documents\\==JAVA - BOOTCAMP==\\== Repositório - Git ==\\TreinoJava\\controle-candidatos\\bin";
-        // Classe principal a ser executada
-        String mainClass = "candidatura.ProcessoSeletivo";
+    static void entrandoEmContato(String candidato) {
+        int tentativasRealizadas = 1;
+        boolean continuarTentando = true;
+        boolean atendeu = false;
+        do{
+            atendeu= atender();
+            continuarTentando = !atendeu;
+            if(continuarTentando)
+                tentativasRealizadas++;
+            else
+                System.out.println("CONTATO REALIZADO COM SUCESSO");
+        }while(continuarTentando && tentativasRealizadas<3);
 
-        // Lista de comandos
-        List<String> command = new ArrayList<>();
-        command.add(javaPath);
-        command.add(jdwpOptions);
-        command.add("-cp");
-        command.add(classPath);
-        command.add(mainClass);
+        if(atendeu)
+            System.out.println("CONSEGUIMOS CONTATO COM " + candidato + " NA " + tentativasRealizadas + " TENTATIVA");
+        else
+            System.out.println("NÃO CONSEGUIMOS CONTATO COM " + candidato + ", NÚMERO MAXIMO DE TENTATIVAS" + tentativasRealizadas);
+    }
 
-        analisarCandidato(1900.0);
-        analisarCandidato(2200.0);
-        analisarCandidato(2000.0);
-        System.out.println("    Processo seletivo");
+    static boolean atender() {
+        return new Random().nextInt(3)==1;
+    }
 
+    static void imprimirSelecionados() {
+        String [] candidatos = {"FELIPE", "MARCIA", "JULIA", "PAULO", "AUGUSTO"};
 
+        System.out.println("Imprimindo a lista de candidatos informando o indice do elemento");
 
+        for(int indice=0; indice < candidatos.length; indice++) {
+            System.out.println("O candidato de n°" + (indice+1) + " é o " + candidatos[indice]);
+        }
 
+        System.out.println("Forma abreviada de interação each");
+
+        for(String candidato: candidatos) {
+            System.out.println("O candidato foi " + candidato);
+        }
+    }
+
+    static void selecaoCandidatos() {
+        String[] candidatos = {"FELIPE", "MARCIA", "JULIA", "PAULO", "AUGUSTO", "MONICA", "FABRICIO", "MIRELA", "DANIELA", "JORGE"};
+
+        int candidatosSelecionados = 0;
+        int candidatosAtual = 0;
+        double salarioBase = 2000.0;
+
+        while(candidatosSelecionados < 5 && candidatosAtual < candidatos.length) {
+            String candidato = candidatos[candidatosAtual]; 
+            double salarioPretendido = valorPretendido();
+
+            System.out.println("O candidato " + candidato + " Solicitou este valor de salário " + salarioPretendido);
+            if (salarioBase >= salarioPretendido) {
+                System.out.println("O candidato " + " foi selecionado para a vaga");
+                candidatosSelecionados++;
+            }
+            candidatosAtual++;
+        }
 
     }
+
+    static double valorPretendido(){
+        return ThreadLocalRandom.current().nextDouble(1800, 2200);
+    }
+
     static void analisarCandidato (double salarioPretendido) {
 
         double salarioBase = 2000.0;
