@@ -22,11 +22,14 @@ public class VerificacaoChequeEspecial {
              // Em caso positivo, imprimir "Transação realizada com sucesso utilizando o cheque especial."
             // Caso contrário, imprimir "Transação não realizada. Limite do cheque especial excedido."
 
-            if (saque <= limiteChequeEspecial) {
-                System.out.println("Transacao nao realizada. Limite do cheque especial excedido.");
-            } else {
+            double saldoComCheque = saldo + limiteChequeEspecial;
+
+            if (saque <= saldoComCheque) {
                 System.out.println("Transacao realizada com sucesso utilizando o cheque especial.");
+            } else {
+                System.out.println("Transacao nao realizada. Limite do cheque especial excedido.");
             }
+            
            
         }
 
